@@ -1,0 +1,39 @@
+{block content}
+	<h1>Posts</h1>
+
+	{* <a n:href="Edit:create">Napsat nový příspěvek</a> *}
+    <div n:snippet="postsContainer">
+        <div n:foreach="$posts as $id => $post">
+            <div class="post ajax">
+                <div class="date">{$post->created_at|date:'F j, Y'}</div>
+
+                {* <h2><a href="{link Post:show $post->id}" class="ajax">{$post->title}</a></h2> *}
+                <h2>
+                    <a n:href="Post:show id => $post->id" class="ajax">
+                        {$post->title}
+                    </a>
+                </h2>
+
+                <div>{$post->content|truncate:50}</div>
+            </div>
+        </div>
+	</div>
+    <div class="pagination">
+        {if $page > 1}
+            <a n:href="index, 1" class="ajax">First</a>
+            &nbsp;|&nbsp;
+            <a n:href="index, $page - 1" class="ajax">Previous</a>
+            &nbsp;|&nbsp;
+        {/if}
+
+        Page {$page} of {$lastPage}
+
+        {if $page < $lastPage}
+            &nbsp;|&nbsp;
+            <a n:href="index, $page + 1" class="ajax">Next</a>
+            &nbsp;|&nbsp;
+            <a n:href="index, $lastPage" class="ajax">Last</a>
+        {/if}
+    </div>
+    <a n:href="Post:create" class="ajax">Create new post</a>
+{/block}

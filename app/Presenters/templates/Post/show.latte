@@ -1,0 +1,33 @@
+{block content}
+	<div n:snippet="post">
+        <h1>{$post->title}</h1>
+        <div >{$post->user->username}</div>
+        <div class="date">{$post->created_at|date:'F j, Y'}</div>
+        <div>{$post->content}</div>
+    </div>
+    <div n:snippet="comments">
+        <h2>Comments ({$commentsCount})</h2>
+
+        <div class="comments">
+            {foreach $comments as $comment}
+                <p>
+                    <b>{$comment->user->username}</b>:
+                </p>
+                <div>
+                    {$comment->content}
+                </div>
+            {/foreach}
+        </div>
+
+        <h2>Add comment</h2>
+        <form n:name=commentForm class=form>
+        <div>
+            <label n:name=content>Comment: <input n:name=content></label>
+        </div>
+        <div>
+            <input n:name=send class="btn btn-default ajax">
+        </div>
+    </form>
+    </div>
+
+{/block}
