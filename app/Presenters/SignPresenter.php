@@ -12,6 +12,8 @@ use Nette\Application\UI\Form;
 final class SignPresenter extends BasePresenter
 {
 
+	// use RequireLoggedUser;
+
 	/** @persistent */
 	public string $backlink = '';
 
